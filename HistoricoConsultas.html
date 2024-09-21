@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background-color: #f9f9f9;
+      }
+      h3 {
+        color: #333;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th, td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+      }
+      th {
+        background-color: #4CAF50;
+        color: white;
+      }
+      tr:hover {
+        background-color: #f1f1f1;
+      }
+      #fecharBtn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      #fecharBtn:hover {
+        background-color: #45a049;
+      }
+      #mensagem {
+        color: red;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>Histórico de Consultas de CNPJ</h3>
+    <div id="mensagem"></div>
+    <table>
+      <thead>
+        <tr>
+          <th>CNPJ</th>
+          <th>Nome</th>
+          <th>Fantasia</th>
+          <th>UF</th>
+          <th>Telefone</th>
+          <th>E-mail</th>
+          <th>Atividade Principal</th>
+          <th>Situacao</th>
+          <th>Logradouro</th>
+          <th>Número</th>
+          <th>Bairro</th>
+          <th>Município</th>
+          <th>Capital Social</th>
+        </tr>
+      </thead>
+      <tbody id="historicoTabela">
+        <!-- Os dados serão preenchidos aqui via JavaScript -->
+      </tbody>
+    </table>
+    <button id="fecharBtn" onclick="google.script.host.close()">Fechar</button>
+    <script>
+      // Chama a função no Apps Script para buscar o histórico de consultas
+      google.script.run.withSuccessHandler(preencherHistoricoTabela).getHistoricoConsultas();
+
+      function preencherHistoricoTabela(dados) {
+        const tabela = document.getElementById('historicoTabela');
+        const mensagem = document.getElementById('mensagem');
+
+        if (dados.length === 0) {
+          mensagem.textContent = 'Nenhuma consulta foi encontrada.';
+          return;
+        }
+
+        dados.forEach(function(linha) {
+          const row = tabela.insertRow();
+          linha.forEach(function(celula) {
+            const cell = row.insertCell();
+            cell.textContent = celula;
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

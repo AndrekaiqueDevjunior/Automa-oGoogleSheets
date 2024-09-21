@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+  </head>
+  <body>
+    
+  </body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <style>
+    /* Estilos para o modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4);
+      padding-top: 60px;
+    }
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Gerar Proposta</h2>
+    <button id="generateBtn">Gerar PDF</button>
+  </div>
+</div>
+
+<script>
+  var modal = document.getElementById("myModal");
+  var span = document.getElementsByClassName("close")[0];
+  
+  function openModal() {
+    modal.style.display = "block";
+  }
+  
+  function closeModal() {
+    modal.style.display = "none";
+  }
+  
+  document.getElementById("generateBtn").onclick = function() {
+    google.script.run
+      .gerarPDFComHistorico()
+      .then(function() {
+        closeModal();
+        google.script.host.close();
+      })
+      .catch(function(error) {
+        alert('Erro: ' + error.message);
+      });
+  };
+
+  span.onclick = closeModal;
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      closeModal();
+    }
+  };
+
+  window.onload = openModal;
+</script>
+
+</body>
+</html>
