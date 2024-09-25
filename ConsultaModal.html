@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <style>
+    /* Seu estilo aqui */
+  </style>
+</head>
+<body>
+  <h3>Consulta de Propostas</h3>
+  <input type="text" id="searchInput" placeholder="Pesquisar proposta...">
+  <button id="searchButton" onclick="buscaProposta()">Pesquisar</button>
+  <div id="mensagem"></div>
+  <div id="loading" style="display:none;">Pesquisando...</div>
+  <table id="proposalTable">
+    <thead>
+      <tr>
+        <!-- Cabeçalhos da tabela -->
+      </tr>
+    </thead>
+    <tbody id="proposalTableBody">
+      <!-- Dados serão preenchidos aqui -->
+    </tbody>
+  </table>
+  <button id="fecharBtn" onclick="google.script.host.close()">Fechar</button>
+
+  <script>
+    async function buscaProposta() {
+      const searchTerm = document.getElementById('searchInput').value.trim();
+      document.getElementById('loading').style.display = 'block'; // Mostra a mensagem de carregamento
+
+      const response = await fetch(`https://script.google.com/macros/s/1kdinwor034KBUn-QJiiLYA183sglfGhDDfuIXbfBjgVg6J38-88_7tRu/exec?search=${encodeURIComponent(searchTerm)}`);
+      const dados = await response.json();
+
+      displayProposals(dados);
+      document.getElementById('loading').style.display = 'none'; // Esconde a mensagem de carregamento
+    }
+
+    function displayProposals(proposalsToDisplay) {
+      const proposalTableBody = document.getElementById('proposalTableBody');
+      proposalTableBody.innerHTML = ''; // Limpa a tabela
+
+      if (proposalsToDisplay.length === 0) {
+        document.getElementById('mensagem').textContent = 'Proposta não encontrada.';
+        return;
+      }
+
+      proposalsToDisplay.forEach(proposal => {
+        const row = proposalTableBody.insertRow();
+        proposal.forEach(cell => {
+          const cellElement = row.insertCell();
+          cellElement.textContent = cell;
+        });
+      });
+      document.getElementById('mensagem').textContent = ''; // Limpa a mensagem de erro
+    }
+  </script>
+</body>
+</html>

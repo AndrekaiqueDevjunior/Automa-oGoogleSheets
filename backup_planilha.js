@@ -24,12 +24,7 @@ function backupPlanilha() {
   });
 }
 
-function onOpen() {
-  var ui = SpreadsheetApp.getUi();
-  ui.createMenu('Meu Menu')
-      .addItem('Gerar PDF e QR Code', 'abrirModalComProposta')
-      .addToUi();
-}
+
 
 function abrirModalComProposta() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -124,12 +119,12 @@ function backupPlanilha() {
 }
 
 
-function onOpen() {
-  var ui = SpreadsheetApp.getUi();
-  ui.createMenu('Meu Menu')
-      .addItem('Gerar PDF e QR Code', 'gerarPDFEQRCode')
-      .addToUi();
-}
+//function onOpen() {
+ //// var ui = SpreadsheetApp.getUi();
+ //// ui.createMenu('Meu Menu')
+   ////   .addItem('Gerar PDF e QR Code', 'gerarPDFEQRCode')
+    ////  .addToUi();
+////}
 
 function gerarPDFEQRCode(numeroProposta) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();

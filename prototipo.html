@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Proposta</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            width: 150px;
+            font-weight: bold;
+        }
+        .form-group input, .form-group select {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .section-title {
+            margin-top: 20px;
+            font-size: 18px;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        .flex-wrap {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .flex-wrap .form-group {
+            width: 48%;
+            margin-right: 2%;
+        }
+        .flex-wrap .form-group:nth-child(2n) {
+            margin-right: 0;
+        }
+        .full-width {
+            width: 100%;
+        }
+        .item-group {
+            display: flex;
+            flex-wrap: wrap;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #f9f9f9;
+        }
+        .item-group .form-group {
+            width: 30%;
+            margin-right: 2%;
+        }
+        .item-group .form-group:nth-child(3n) {
+            margin-right: 0;
+        }
+        .add-item-btn, .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .add-item-btn:hover, .submit-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script>
+        function addItem() {
+            const itemContainer = document.getElementById('items-container');
+            const itemGroup = document.createElement('div');
+            itemGroup.className = 'item-group';
+            itemGroup.innerHTML = `
+                <div class="form-group">
+                    <label>Item:</label>
+                    <input type="text" name="item[]" required>
+                </div>
+                <div class="form-group">
+                    <label>Fabricante:</label>
+                    <input type="text" name="fabricante[]" required>
+                </div>
+                <div class="form-group">
+                    <label>Código:</label>
+                    <input type="text" name="codigo[]" required>
+                </div>
+                <div class="form-group">
+                    <label>Descrição:</label>
+                    <input type="text" name="descricao[]" required>
+                </div>
+                <div class="form-group">
+                    <label>NCM:</label>
+                    <input type="text" name="ncm[]" required>
+                </div>
+                <div class="form-group">
+                    <label>Quantidade:</label>
+                    <input type="number" name="quantidade[]" required>
+                </div>
+                <div class="form-group">
+                    <label>Prazo de Entrega:</label>
+                    <input type="text" name="prazo_entrega[]" required>
+                </div>
+                <div class="form-group">
+                    <label>Quantidade em Estoque:</label>
+                    <input type="number" name="quantidade_estoque[]" required>
+                </div>
+                <div class="form-group">
+                    <label>Valor Unitário:</label>
+                    <input type="number" step="0.01" name="valor_unitario[]" required>
+                </div>
+                <div class="form-group">
+                    <label>Desconto:</label>
+                    <input type="number" step="0.01" name="desconto[]" required>
+                </div>
+                <div class="form-group">
+                    <label>Valor Unit. (C/ Desconto):</label>
+                    <input type="number" step="0.01" name="valor_unit_desconto[]" required>
+                </div>
+                <div class="form-group">
+                    <label>Valor Total:</label>
+                    <input type="number" step="0.01" name="valor_total[]" required>
+                </div>
+            `;
+            itemContainer.appendChild(itemGroup);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2 class="form-title">Formulário de Proposta</h2>
+
+        <div class="section-title">Informações do Cliente</div>
+        <div class="form-group">
+            <label for="cliente">Cliente:</label>
+            <input type="text" id="cliente" name="cliente">
+        </div>
+        <div class="form-group">
+            <label for="nomeFantasia">Nome Fantasia:</label>
+            <input type="text" id="nomeFantasia" name="nomeFantasia">
+        </div>
+        <div class="form-group">
+            <label for="cnpj">CNPJ:</label>
+            <input type="text" id="cnpj" name="cnpj">
+        </div>
+        <!-- Campos adicionais do cliente omitidos por brevidade -->
+
+        <div class="section-title">Itens da Proposta</div>
+        <div id="items-container">
+            <!-- Item 1 -->
+            <div class="item-group">
+                <div class="form-group">
+                    <label>Item:</label>
+                    <input type="text" name="item[]" required>
+                </div>
+                <div class="form-group">
+                    <label>Fabricante:</label>
+                    <input type="text" name="fabricante[]" required>
+                </div>
+                <div class="form-group">
+                    <label>Código:</label>
+                    <input type="text" name="codigo[]" required>
+                </div>
+                <div class="form-group">
+                    <label>Descrição:</label>
+                    <input type="text" name="descricao[]" required>
+                </div>
+                <div class="form-group">
+                    <label>NCM:</label>
+                    <input type="text" name="ncm[]" required>
+                </div>
+                <div class="form-group">
+                    <label>Quantidade:</label>
+                    <input type="number" name="quantidade[]" required>
+                </div>
+                <div class="form-group">
+                    <label>Prazo de Entrega:</label>
+                    <input type="text" name="prazo_entrega[]" required>
+                </div>
+                <div class="form-group">
+                    <label>Quantidade em Estoque:</label>
+                    <input type="number" name="quantidade_estoque[]" required>
+                </div>
+                <div class="form-group">
+                    <label>Valor Unitário:</label>
+                    <input type="number" step="0.01" name="valor_unitario[]" required>
+                </div>
+                <div class="form-group">
+                    <label>Desconto:</label>
+                    <input type="number" step="0.01" name="desconto[]" required>
+                </div>
+                <div class="form-group">
+                    <label>Valor Unit. (C/ Desconto):</label>
+                    <input type="number" step="0.01" name="valor_unit_desconto[]" required>
+                </div>
+                <div class="form-group">
+                    <label>Valor Total:</label>
+                    <input type="number" step="0.01" name="valor_total[]" required>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="add-item-btn" onclick="addItem()">Adicionar Novo Item</button>
+        
+        <button type="submit" class="submit-btn">Enviar Proposta</button>
+    </div>
+</body>
+</html>

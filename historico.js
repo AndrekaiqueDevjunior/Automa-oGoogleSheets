@@ -5,13 +5,7 @@ function abrirHistoricoConsultas() {
       .setHeight(1000);
   SpreadsheetApp.getUi().showModalDialog(htmlOutput, 'Histórico de Consultas');
 }
-function onOpen() {
-  var ui = SpreadsheetApp.getUi();
-  ui.createMenu('Consulta CNPJ')
-    .addItem('Buscar dados de CNPJ', 'abrirFormCNPJ')
-    .addItem('Histórico de Consultas', 'abrirHistoricoConsultas') // Adiciona a nova opção
-    .addToUi();
-}
+
 function getHistoricoConsultas() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName('ConsultarCNPJ'); // Substitua pelo nome da sua aba de histórico

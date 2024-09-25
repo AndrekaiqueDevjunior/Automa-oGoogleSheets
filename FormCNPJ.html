@@ -134,8 +134,8 @@
 <body>
   <div id="form-container">
     <h3>Consultar CNPJ</h3>
-    <label for="cnpj">Digite o CNPJ:</label>
-    <input type="text" id="cnpj" placeholder="00.000.000/0001-91" />
+    <label for="input-cnpj">Digite o CNPJ:</label> <!-- Alterado o ID para "input-cnpj" -->
+    <input type="text" id="input-cnpj" placeholder="00.000.000/0001-91" />
     
     <div class="button-container">
       <button onclick="buscarDados()">Buscar</button>
@@ -154,6 +154,7 @@
 
     <!-- Dados do CNPJ -->
     <div id="dados">
+      
       <div class="linha"><span class="label">Nome:</span> <span id="nome"></span></div>
       <div class="linha"><span class="label">Fantasia:</span> <span id="fantasia"></span></div>
       <div class="linha"><span class="label">UF:</span> <span id="uf"></span></div>
@@ -166,13 +167,14 @@
       <div class="linha"><span class="label">Bairro:</span> <span id="bairro"></span></div>
       <div class="linha"><span class="label">Município:</span> <span id="municipio"></span></div>
       <div class="linha"><span class="label">Capital Social:</span> <span id="capital"></span></div>
+      <div class="linha"><span class="label">CNPJ:</span> <span id="cnpj"></span></div> <!-- cnpj para exibição -->
     </div>
     <button id="btnFechar" onclick="google.script.host.close()">Fechar</button>
   </div>
 
   <script>
     function buscarDados() {
-      var cnpj = document.getElementById('cnpj').value;
+      var cnpj = document.getElementById('input-cnpj').value;  // Corrigido para o novo ID
       if (!validarCNPJ(cnpj)) {
         alert('Por favor, insira um CNPJ válido.');
         return;
@@ -218,6 +220,7 @@
       document.getElementById('bairro').textContent = response[9];
       document.getElementById('municipio').textContent = response[10];
       document.getElementById('capital').textContent = response[11];
+      document.getElementById('cnpj').textContent = response[12];  // Exibição do CNPJ no final
 
       document.getElementById('dados').style.display = 'block';  // Exibe o bloco de dados
     }
@@ -235,7 +238,10 @@
         Número: ${document.getElementById('numero').textContent}
         Bairro: ${document.getElementById('bairro').textContent}
         Município: ${document.getElementById('municipio').textContent}
-        Capital Social: ${document.getElementById('R$capital').textContent}
+        Capital Social: ${document.getElementById('capital').textContent}
+        CNPJ: ${document.getElementById('cnpj').textContent}
+
+        
       `;
 
       navigator.clipboard.writeText(dadosTexto.trim()).then(function() {
@@ -246,7 +252,7 @@
     }
 
     function limparCampos() {
-      document.getElementById('cnpj').value = '';
+      document.getElementById('input-cnpj').value = '';  // Limpa o campo de entrada do CNPJ
       document.getElementById('dados').style.display = 'none';
       document.getElementById('feedback').style.display = 'none';
       document.getElementById('loading').style.display = 'none';
